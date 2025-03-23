@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>診断結果</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #f0f7f7;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .result-box {
+            background-color: #fff;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(106, 193, 208, 0.1);
+            margin: 0 auto;
+            max-width: 600px;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid rgba(106, 193, 208, 0.1);
+        }
+
+        h1 {
+            color: #5fb5d0;
+            font-size: 28px;
+            margin: 0 0 30px;
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+        .result-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 25px;
+            color: #2c3e50;
+            line-height: 1.4;
+            padding: 0 10px;
+        }
+
+        .result-text {
+            font-size: 16px;
+            margin-bottom: 30px;
+            color: #456;
+            line-height: 1.8;
+            text-align: center;
+            padding: 0 15px;
+        }
+
+        .percentages {
+            margin: 30px auto;
+            font-weight: 500;
+            background: rgba(106, 193, 208, 0.05);
+            padding: 20px;
+            border-radius: 12px;
+            color: #456;
+            font-size: 16px;
+            max-width: 500px;
+            line-height: 1.6;
+        }
+
+        .character-image {
+            width: 200px;
+            height: auto;
+            margin: 20px auto;
+            display: block;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .character-name {
+            font-size: 14px;
+            color: #666;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .cta-text {
+            margin: 35px 0;
+            color: #5fb5d0;
+            font-weight: 500;
+            font-size: 17px;
+            line-height: 1.8;
+            padding: 0 15px;
+        }
+
+        .btn {
+            background: #06C755;
+            color: #fff;
+            border: none;
+            padding: 18px 30px;
+            font-size: 17px;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+            margin: 10px auto;
+            width: 100%;
+            max-width: 300px;
+            box-sizing: border-box;
+            box-shadow: 0 5px 15px rgba(6, 199, 85, 0.3);
+            text-align: center;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(6, 199, 85, 0.4);
+            background: #05b34c;
+        }
+
+        .btn.secondary {
+            background: #5fb5d0;
+            box-shadow: 0 5px 15px rgba(95, 181, 208, 0.3);
+            margin-top: 15px;
+        }
+
+        .btn.secondary:hover {
+            box-shadow: 0 8px 20px rgba(95, 181, 208, 0.4);
+            background: #54a9c4;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .return-link {
+            margin-top: 20px;
+            color: #5fb5d0;
+            text-decoration: none;
+            font-size: 15px;
+            display: inline-block;
+            padding: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .return-link:hover {
+            color: #4a90e2;
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 15px;
+            }
+
+            .result-box {
+                padding: 30px 20px;
+                margin: 0 auto;
+            }
+
+            h1 {
+                font-size: 24px;
+                margin-bottom: 25px;
+            }
+
+            .result-title {
+                font-size: 19px;
+                margin-bottom: 20px;
+                padding: 0 5px;
+            }
+
+            .result-text {
+                font-size: 15px;
+                margin-bottom: 25px;
+                padding: 0 5px;
+            }
+
+            .percentages {
+                margin: 25px auto;
+                padding: 15px;
+                font-size: 14px;
+                border-radius: 10px;
+            }
+
+            .cta-text {
+                margin: 30px 0;
+                font-size: 15px;
+                padding: 0 10px;
+            }
+
+            .btn {
+                padding: 16px 25px;
+                font-size: 16px;
+                max-width: 280px;
+            }
+
+            .return-link {
+                font-size: 14px;
+                padding: 8px;
+            }
+
+            .character-image {
+                width: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="result-box">
+        <h1>診断結果</h1>
+        <div class="result-title" id="resultType"></div>
+        <div class="result-text" id="resultText"></div>
+        <div class="percentages" id="percentages"></div>
+        <div id="character-container">
+            <img id="character-image" class="character-image" alt="キャラクター">
+            <div id="character-name" class="character-name"></div>
+        </div>
+
+        <p class="cta-text">あなたのタイプに合わせたアドバイスで<br>理想のパートナーとの出会いをグッと引き寄せます！<br>まずはお気軽にご相談ください😊</p>
+        
+        <div class="button-container">
+            <a href="https://line.me/R/ti/p/@wcz8915w" class="btn" target="_blank">
+                LINE公式で無料相談を受ける
+            </a>
+
+            <a href="index.html" class="btn secondary">
+                診断トップに戻る
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // キャラクター画像のマッピング
+        const characterImages = {
+            "キングタイプ": {
+                image: "img/折賀正義.jpg",
+                name: "折賀 正義"
+            },
+            "ナイトタイプ": {
+                image: "img/理知誠実.jpg",
+                name: "理知 誠実"
+            },
+            "スタータイプ": {
+                image: "img/響茂自由.jpg",
+                name: "響茂 自由"
+            },
+            "プリンセスタイプ": {
+                image: "img/愛野きらら.jpg",
+                name: "愛野 きらら"
+            },
+            "クイーンタイプ": {
+                image: "img/芽座瀬たかみ.jpg",
+                name: "芽座瀬 たかみ"
+            },
+            "エンジェルタイプ": {
+                image: "img/逸萌静香.jpg",
+                name: "逸萌 静香"
+            },
+            "バランスタイプ": {
+                male: {
+                    image: "img/男性_バランス.png",
+                    name: "バランスタイプ"
+                },
+                female: {
+                    image: "img/女性_バランス.png",
+                    name: "バランスタイプ"
+                }
+            }
+        };
+
+        // URLから診断結果とスコア情報を取得
+        const params = new URLSearchParams(window.location.search);
+        const resultType = params.get('result');
+        const gender = params.get('gender') || 'female';
+        
+        // 性別に応じてスコアのパラメータ名を取得
+        const scores = gender === 'male' 
+            ? {
+                king: parseInt(params.get('king')) || 0,
+                knight: parseInt(params.get('knight')) || 0,
+                star: parseInt(params.get('star')) || 0
+            }
+            : {
+                hime: parseInt(params.get('hime')) || 0,
+                hisho: parseInt(params.get('hisho')) || 0,
+                haha: parseInt(params.get('haha')) || 0
+            };
+
+        // バランスタイプの判定を行う関数
+        function isBalancedType(scores, gender) {
+            if (gender === 'male') {
+                const values = [scores.king, scores.knight, scores.star];
+                const max = Math.max(...values);
+                const min = Math.min(...values);
+                // 最大値と最小値の差が5%以内であればバランスタイプと判定
+                return (max - min) <= 5;
+            } else {
+                const values = [scores.hime, scores.hisho, scores.haha];
+                const max = Math.max(...values);
+                const min = Math.min(...values);
+                return (max - min) <= 5;
+            }
+        }
+
+        // バランスタイプかどうかを判定
+        const isBalanced = isBalancedType(scores, gender);
+        const displayType = isBalanced ? "バランスタイプ" : resultType;
+
+        // 診断結果の説明テキスト
+        const descriptions = {
+            // 女性向けの説明
+            "プリンセスタイプ": "尽くされることで愛情を感じ、恋愛では「特別扱い」を求める傾向が強いです。",
+            "クイーンタイプ": "自立心が強く、自分で物事を解決する頼もしいタイプです。",
+            "エンジェルタイプ": "世話好きで、相手のために尽くしてしまう愛情深いタイプです。",
+            "バランスタイプ": "甘え上手・頼られ上手・世話好きの要素をバランスよく持ち、相手に応じて柔軟に対応できます。ただし自分の気持ちを大切にすることも忘れずに。",
+            
+            // 男性向けの説明
+            "キングタイプ": "リーダーシップがあり、自分の意見をしっかり持っている頼もしいタイプです。",
+            "ナイトタイプ": "誠実で思いやりがあり、相手の気持ちに寄り添える優しいタイプです。",
+            "スタータイプ": "自由な発想と行動力があり、柔軟に物事に対応できる魅力的なタイプです。",
+            "バランスタイプ": "リーダーシップ・思いやり・柔軟性のバランスが取れており、状況に応じて適切に対応できるオールラウンドなタイプです。ただし、周りに合わせすぎて自分の意見を抑えてしまうことも。"
+        };
+
+        // 結果を表示
+        document.getElementById("resultType").textContent = `あなたのタイプは「${displayType}」です！`;
+        document.getElementById("resultText").textContent = descriptions[displayType];
+        
+        // スコアの表示テキストを性別に応じて変更
+        const percentageText = gender === 'male'
+            ? `キング度: ${scores.king}% / ナイト度: ${scores.knight}% / スター度: ${scores.star}%`
+            : `プリンセス度: ${scores.hime}% / リーダー度: ${scores.hisho}% / サポーター度: ${scores.haha}%`;
+        
+        document.getElementById("percentages").textContent = percentageText;
+
+        // キャラクター画像を表示
+        const characterContainer = document.getElementById("character-container");
+        if (isBalanced) {
+            const characterImage = document.getElementById("character-image");
+            const characterName = document.getElementById("character-name");
+            const balanceImage = characterImages["バランスタイプ"][gender];
+            characterImage.src = balanceImage.image;
+            characterImage.alt = balanceImage.name;
+            characterName.textContent = balanceImage.name;
+            characterContainer.style.display = "block";
+        } else if (characterImages[displayType]) {
+            const characterImage = document.getElementById("character-image");
+            const characterName = document.getElementById("character-name");
+            characterImage.src = characterImages[displayType].image;
+            characterImage.alt = characterImages[displayType].name;
+            characterName.textContent = characterImages[displayType].name;
+            characterContainer.style.display = "block";
+        } else {
+            characterContainer.style.display = "none";
+        }
+    </script>
+</body>
+</html>

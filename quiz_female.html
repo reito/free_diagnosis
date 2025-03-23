@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>恋愛タイプ診断</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #f0f7f7;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #6ac1d0 0%, #5fb5d0 100%);
+            padding: 20px;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(106, 193, 208, 0.2);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            background-color: #fff;
+            padding: 10px 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        nav a {
+            margin: 5px 10px;
+            padding: 5px 10px;
+            text-decoration: none;
+            color: #5fb5d0;
+            font-weight: 500;
+            font-size: 14px;
+            position: relative;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #6ac1d0;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        main {
+            padding: 20px 15px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .question {
+            margin-bottom: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(106, 193, 208, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(106, 193, 208, 0.1);
+        }
+
+        .question:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(106, 193, 208, 0.15);
+        }
+
+        .question p {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            font-weight: 500;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(106, 193, 208, 0.1);
+            line-height: 1.6;
+        }
+
+        .question label {
+            display: block;
+            margin: 12px 0;
+            cursor: pointer;
+            padding: 12px 15px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+            color: #456;
+            font-size: 15px;
+        }
+
+        .question label:hover {
+            background-color: rgba(106, 193, 208, 0.05);
+        }
+
+        .question input[type="radio"] {
+            margin-right: 12px;
+            transform: scale(1.2);
+            accent-color: #5fb5d0;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #6ac1d0 0%, #5fb5d0 100%);
+            border: none;
+            padding: 16px 30px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 30px auto;
+            width: 100%;
+            max-width: 280px;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(106, 193, 208, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(106, 193, 208, 0.4);
+            background: linear-gradient(135deg, #5fb5d0 0%, #54a9c4 100%);
+        }
+
+        .progress {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(106, 193, 208, 0.1);
+            border: 1px solid rgba(106, 193, 208, 0.1);
+            text-align: center;
+        }
+
+        .progress-text {
+            text-align: center;
+            margin: 0;
+            color: #5fb5d0;
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background-color: #e9f5f7;
+            border-radius: 3px;
+            margin-top: 12px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #6ac1d0 0%, #5fb5d0 100%);
+            width: 0;
+            transition: width 0.3s ease;
+        }
+
+        .progress-percentage {
+            margin-top: 8px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 20px;
+            }
+
+            nav {
+                padding: 8px 2px;
+            }
+
+            nav a {
+                font-size: 13px;
+                margin: 3px 8px;
+            }
+
+            .question {
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+
+            .question p {
+                font-size: 15px;
+                padding-bottom: 8px;
+            }
+
+            .question label {
+                padding: 10px 12px;
+                font-size: 14px;
+            }
+
+            .btn {
+                padding: 14px 25px;
+                font-size: 15px;
+                margin: 25px auto;
+            }
+
+            .progress {
+                padding: 12px;
+                margin-bottom: 15px;
+            }
+
+            .progress-text {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>恋愛タイプ診断</h1>
+    </header>
+
+    <nav>
+        <a href="https://blanca715.com/">相談所トップ</a>
+        <a href="https://blanca715.com/category/%e3%82%a4%e3%83%99%e3%83%b3%e3%83%88/">イベント情報</a>
+        <a href="https://blanca715.com/contact/">無料相談予約</a>
+        <a href="https://blanca715.com/achievement/">成婚事例</a>
+    </nav>
+
+    <main>
+        <div class="progress">
+            <p class="progress-text">あなたの性格タイプを診断します</p>
+            <div class="progress-bar">
+                <div class="progress-bar-fill" id="progressBarFill"></div>
+            </div>
+            <p class="progress-percentage" style="margin-top: 10px; font-size: 14px; color: #666;">
+                回答済み: <span id="answeredCount">0</span> / <span id="totalQuestions">25</span> 問
+            </p>
+        </div>
+
+        <form id="quizForm" action="result.html" method="GET">
+            <div id="quiz"></div>
+            <button class="btn" type="submit">診断結果を見る</button>
+        </form>
+    </main>
+
+    <script>
+        const questions = [
+            { text: "飲み会で初対面の人と話すのは得意？", scores: [2, 1, 0] },
+            { text: "友達に『この人どう？』と紹介されることが多い？", scores: [1, 0, 2] },
+            { text: "好きな人ができたら、積極的にアプローチする？", scores: [0, 2, 1] },
+            { text: "飲み会の席ではつい気配りして料理を取り分ける？", scores: [0, 0, 2] },
+            { text: "相手に尽くすよりも、自分が尽くされる方が嬉しい？", scores: [2, 0, 0] },
+            { text: "気が付けば、周りの人の世話を焼いていることが多い。", scores: [0, 0, 2] },
+            { text: "計画を立てるのが得意で、スケジュール管理が好きだ。", scores: [0, 2, 0] },
+            { text: "パートナーには優しく甘えさせてほしいと思う。", scores: [2, 0, 0] },
+            { text: "自分のやるべきことはきっちりこなさないと気が済まない。", scores: [0, 2, 0] },
+            { text: "誰かが困っていたら放っておけない。", scores: [0, 0, 2] },
+            { text: "特別扱いをされると嬉しい。", scores: [2, 0, 0] },
+            { text: "人に頼るのは苦手で、自分でなんとかしようとする。", scores: [0, 2, 0] },
+            { text: "家族や友人の頼みごとはつい引き受けてしまう。", scores: [0, 0, 2] },
+            { text: "デートのプランは相手に考えてほしい。", scores: [2, 0, 0] },
+            { text: "問題が起きた時、自分が主導して解決しようとする。", scores: [0, 2, 0] },
+            { text: "お世話をするのが好きで、困っている人に自然と声をかける。", scores: [0, 0, 2] },
+            { text: "サプライズやプレゼントが好きで、相手に期待してしまう。", scores: [2, 0, 0] },
+            { text: "誰かに頼るより、自分で何とかするほうが早いと感じる。", scores: [0, 2, 0] },
+            { text: "自分の気持ちよりも、周りの人の意見を優先することが多い。", scores: [0, 0, 2] },
+            { text: "自分が主役のように扱われると嬉しい。", scores: [2, 0, 0] },
+            { text: "「任せる」と言われるより「お願い」と頼られる方が安心する。", scores: [0, 2, 0] },
+            { text: "身近な人の体調や悩みに気づきやすい。", scores: [0, 0, 2] },
+            { text: "恋人とは「特別な日に特別な場所へ行きたい」と思う。", scores: [2, 0, 0] },
+            { text: "仕事や家事などは効率的にこなすタイプだ。", scores: [0, 2, 0] },
+            { text: "つい他人のフォローや手助けを優先してしまう。", scores: [0, 0, 2] }
+        ];
+
+        const quizDiv = document.getElementById("quiz");
+        const progressBarFill = document.getElementById("progressBarFill");
+        const answeredCountSpan = document.getElementById("answeredCount");
+        const totalQuestionsSpan = document.getElementById("totalQuestions");
+
+        // 進捗状況を更新する関数
+        function updateProgress() {
+            const totalQuestions = questions.length;
+            const answeredQuestions = questions.reduce((count, _, index) => {
+                return count + (document.querySelector(`input[name="q${index}"]:checked`) ? 1 : 0);
+            }, 0);
+
+            const progress = (answeredQuestions / totalQuestions) * 100;
+            progressBarFill.style.width = `${progress}%`;
+            answeredCountSpan.textContent = answeredQuestions;
+            totalQuestionsSpan.textContent = totalQuestions;
+        }
+
+        questions.forEach((q, index) => {
+            const questionDiv = document.createElement("div");
+            questionDiv.className = "question";
+
+            questionDiv.innerHTML = `
+                <p>${index + 1}. ${q.text}</p>
+                <label><input type="radio" name="q${index}" value="yes"> はい</label>
+                <label><input type="radio" name="q${index}" value="neutral"> どちらでもない</label>
+                <label><input type="radio" name="q${index}" value="no"> いいえ</label>
+            `;
+
+            // ラジオボタンの変更を監視
+            questionDiv.addEventListener('change', updateProgress);
+            quizDiv.appendChild(questionDiv);
+        });
+
+        document.getElementById('quizForm').onsubmit = function(event) {
+            event.preventDefault();
+
+            // すべての質問に回答されているか確認
+            const unansweredQuestions = questions.reduce((acc, _, index) => {
+                if (!document.querySelector(`input[name="q${index}"]:checked`)) {
+                    acc.push(index + 1);
+                }
+                return acc;
+            }, []);
+
+            if (unansweredQuestions.length > 0) {
+                alert(`以下の質問に回答してください：\n質問 ${unansweredQuestions.join(', ')}`);
+                return;
+            }
+
+            let scores = [0, 0, 0]; // [プリンセス度, クイーン度, エンジェル度]
+
+            questions.forEach((q, index) => {
+                const answer = document.querySelector(`input[name="q${index}"]:checked`);
+                if (answer.value === "yes") {
+                    scores[0] += q.scores[0];
+                    scores[1] += q.scores[1];
+                    scores[2] += q.scores[2];
+                } else if (answer.value === "neutral") {
+                    scores[0] += q.scores[0] / 2;
+                    scores[1] += q.scores[1] / 2;
+                    scores[2] += q.scores[2] / 2;
+                } 
+            });
+
+            const total = scores.reduce((a, b) => a + b, 0);
+            const percentages = scores.map(score => Math.round((score / total) * 100));
+
+            const types = ["プリンセスタイプ", "クイーンタイプ", "エンジェルタイプ"];
+            const resultType = types[scores.indexOf(Math.max(...scores))];
+
+            const params = new URLSearchParams({
+                result: resultType,
+                hime: percentages[0],
+                hisho: percentages[1],
+                haha: percentages[2]
+            });
+
+            window.location.href = `result.html?${params.toString()}`;
+        };
+
+        // 初期進捗状況を表示
+        updateProgress();
+    </script>
+</body>
+</html>
