@@ -1,15 +1,11 @@
 import axios from 'axios';
 
 export default async function handler(req, res) {
-    console.log('✅ 受信データ (全体):', req.body); 
-    console.log('✅ req.headers:', req.headers);
-
     if (req.method === 'POST') {
-        const userId = req.body?.userId || req.body?.events?.[0]?.source?.userId;
+        const { userId } = req.body;
 
         if (!userId) {
-            console.error("❌ userIdが取得できませんでした。");
-            return res.status(400).json({ message: 'userIdがありません。' });
+            return res.status(400).json({ message: '❌ userIdがありません。' });
         }
 
         const LINE_API_URL = 'https://api.line.me/v2/bot/message/push';
