@@ -1,7 +1,7 @@
 {
   "headers": [
     {
-      "source": "/(.*)",  // すべてのリクエストに対応
+      "source": "/(.*)",
       "headers": [
         {
           "key": "Access-Control-Allow-Origin",
