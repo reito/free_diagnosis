@@ -9,45 +9,22 @@
         async function sendToWebhook() {
             const urlParams = new URLSearchParams(window.location.search);
             const userId = urlParams.get('userId');
-            const resultType = urlParams.get('result');
-            const gender = urlParams.get('gender');
+
+            console.log("✅ Webhookに送信する userId:", userId);
 
             if (!userId) {
-                console.error("userIdが取得できませんでした。");
+                console.error("❌ userIdが取得できませんでした。");
                 return;
             }
 
-            try {
-                const response = await fetch('https://free-diagnosis.vercel.app/api/webhook', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ 
-                        userId: userId,
-                        resultType: resultType,
-                        gender: gender,
-                        scores: gender === 'male' ? {
-                            king: parseInt(urlParams.get('king')),
-                            knight: parseInt(urlParams.get('knight')),
-                            star: parseInt(urlParams.get('star'))
-                        } : {
-                            hime: parseInt(urlParams.get('hime')),
-                            hisho: parseInt(urlParams.get('hisho')),
-                            haha: parseInt(urlParams.get('haha'))
-                        }
-                    })
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-            } catch (error) {
-                console.error("Webhookの送信に失敗しました:", error);
-            }
+            await fetch('https://free-diagnosis.vercel.app/api/webhook', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ userId: userId })
+            });
         }
 
-        window.onload = () => {
-            sendToWebhook();
-        };
+        window.onload = sendToWebhook;
     </script>
     <style>
         body {
