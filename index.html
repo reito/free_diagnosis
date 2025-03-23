@@ -5,32 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>恋愛タイプ診断</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <script src="https://static.line-scdn.net/liff/2.20.2/sdk.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            try {
-                await liff.init({ liffId: "2007107360-lER4wONW" });  
-                console.log("✅ LIFF初期化成功");
-
-                if (!liff.isLoggedIn()) {
-                    console.log("LIFF未ログイン。ログイン処理を開始します。");
-                    liff.login();
-                    return;
-                }
-
-                const profile = await liff.getProfile();
-                console.log("✅ 取得した profile:", profile);
-
-                const userId = profile.userId;
-                console.log("✅ 取得した userId:", userId);
-
-                const resultPageUrl = `/result.html?userId=${userId}`;
-                window.location.href = resultPageUrl;
-            } catch (error) {
-                console.error("❌ LIFF初期化エラー:", error);
-            }
-        });
-    </script>
     <style>
         body {
             font-family: 'Noto Sans JP', sans-serif;
@@ -224,5 +198,33 @@
             </ul>
         </div>
     </div>
+
+    <!-- 🚨【LIFF SDKの読み込みはここに配置】 -->
+    <script src="https://static.line-scdn.net/liff/2.20.2/sdk.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                await liff.init({ liffId: "2007107360-lER4wONW" });
+                console.log("✅ LIFF初期化成功");
+
+                if (!liff.isLoggedIn()) {
+                    console.log("LIFF未ログイン。ログイン処理を開始します。");
+                    liff.login();
+                    return;
+                }
+
+                const profile = await liff.getProfile();
+                console.log("✅ 取得した profile:", profile);
+
+                const userId = profile.userId;
+                console.log("✅ 取得した userId:", userId);
+
+                const resultPageUrl = `/result.html?userId=${userId}`;
+                window.location.href = resultPageUrl;
+            } catch (error) {
+                console.error("❌ LIFF初期化エラー:", error);
+            }
+        });
+    </script>
 </body>
 </html> 
