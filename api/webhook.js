@@ -1,12 +1,14 @@
 import axios from 'axios';
 
 export default async function handler(req, res) {
-    if (req.method === 'POST') {
-        console.log('受信データ:', req.body); // デバッグ用ログ
+    console.log('✅ 受信データ (全体):', req.body); 
+    console.log('✅ req.headers:', req.headers);
 
-        const { userId } = req.body;
+    if (req.method === 'POST') {
+        const userId = req.body?.userId || req.body?.events?.[0]?.source?.userId;
 
         if (!userId) {
+            console.error("❌ userIdが取得できませんでした。");
             return res.status(400).json({ message: 'userIdがありません。' });
         }
 
@@ -29,12 +31,12 @@ export default async function handler(req, res) {
                 }
             });
 
-            return res.status(200).json({ message: 'メッセージが送信されました！' });
+            return res.status(200).json({ message: '✅ メッセージが送信されました！' });
         } catch (error) {
-            console.error('LINEメッセージ送信エラー:', error.response?.data || error.message);
+            console.error('❌ LINEメッセージ送信エラー:', error.response?.data || error.message);
             return res.status(500).json({ message: 'メッセージ送信エラー' });
         }
     }
 
-    res.status(405).json({ message: 'Method Not Allowed' });
+    res.status(405).json({ message: '❌ Method Not Allowed' });
 }
