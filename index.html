@@ -201,10 +201,15 @@
     </div>
 
     <!-- 🚨【LIFF SDKの読み込みはここに配置】 -->
-    <script src="https://static.line-scdn.net/liff/2.21.0/sdk.js" crossorigin="anonymous"></script>
+    <script src="https://static.line-scdn.net/liff/2.21.0/sdk.js" crossorigin="anonymous" async></script>
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
             try {
+                if (!window.liff) {
+                    console.error("❌ LIFF SDKがロードされていません。");
+                    return;
+                }
+
                 await liff.init({ liffId: "2007107360-lER4wONW" });
                 console.log("✅ LIFF初期化成功");
 
