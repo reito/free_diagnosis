@@ -435,8 +435,12 @@
                 'star': 'スタータイプ'
             };
 
+            // URLからuserIdを取得
+            const urlParams = new URLSearchParams(window.location.search);
+            const userId = urlParams.get('userId');
+
             // 結果ページへリダイレクト
-            window.location.href = `result.html?result=${typeMapping[resultType]}&king=${normalizedScores.king}&knight=${normalizedScores.knight}&star=${normalizedScores.star}&gender=male`;
+            window.location.href = `result.html?result=${typeMapping[resultType]}&king=${normalizedScores.king}&knight=${normalizedScores.knight}&star=${normalizedScores.star}&gender=male&userId=${userId}`;
         });
 
         // 初期進捗状況を表示
