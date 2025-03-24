@@ -26,7 +26,7 @@ export default async function handler(req, res) {
                 messages: [
                     {
                         type: 'text',
-                        text: "無料相談の受付ありがとうございます！😊\n\n以下の方法からお選びください。\n\n🔹 【簡単なご相談はこちら】このままLINEでOK！\n🔹 【じっくりご相談したい方はこちら】👉 [お問い合わせフォームのリンク]\n\nどちらもお気軽にご利用くださいね♪"
+                        text: "無料相談の受付ありがとうございます！😊\n\n以下の方法からお選びください。\n\n🔹 【簡単なご相談はこちら】このままLINEでOK！\n🔹 【じっくりご相談したい方はこちら】👉 https://blanca715.com/contact/\n\nどちらもお気軽にご利用くださいね♪"
                     }
                 ]
             }, {
