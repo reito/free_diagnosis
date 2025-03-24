@@ -4,6 +4,7 @@ export default async function handler(req, res) {
     if (req.method === 'POST') {
         console.log("✅ 受信データ (全体):", JSON.stringify(req.body, null, 2));
 
+        // `result.html` からのリクエストのみを受け付ける
         const { userId } = req.body;
 
         if (!userId) {
