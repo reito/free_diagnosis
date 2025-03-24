@@ -203,34 +203,38 @@
     <!-- 🚨【LIFF SDKの読み込みはここに配置】 -->
     <script src="https://static.line-scdn.net/liff/edge/2/sdk.js" crossorigin="anonymous" async></script>
     <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            try {
-                if (!window.liff) {
-                    console.error("❌ LIFF SDKがロードされていません。");
-                    return;
-                }
-
-                await liff.init({ liffId: "2007107360-lER4wONW" });
-                console.log("✅ LIFF初期化成功");
-
-                if (!liff.isLoggedIn()) {
-                    console.log("LIFF未ログイン。ログイン処理を開始します。");
-                    liff.login();
-                    return;
-                }
-
-                const profile = await liff.getProfile();
-                console.log("✅ 取得した profile:", profile);
-
-                const userId = profile.userId;
-                console.log("✅ 取得した userId:", userId);
-
-                const resultPageUrl = `/result.html?userId=${userId}`;
-                window.location.href = resultPageUrl;
-            } catch (error) {
-                console.error("❌ LIFF初期化エラー:", error);
-            }
-        });
-    </script>
+      async function initializeLIFF() {
+          if (!window.liff) {
+              console.error("❌ LIFF SDKがロードされていません。3秒後に再試行します...");
+              setTimeout(() => location.reload(), 3000);  // 3秒後にリロード
+              return;
+          }
+  
+          try {
+              await liff.init({ liffId: "2007107360-lER4wONW" });
+              console.log("✅ LIFF初期化成功");
+  
+              if (!liff.isLoggedIn()) {
+                  console.log("❗️ LIFF未ログイン。リロードして再試行します。");
+                  liff.login();
+                  return;
+              }
+  
+              const profile = await liff.getProfile();
+              console.log("✅ 取得した profile:", profile);
+  
+              const userId = profile.userId;
+              console.log("✅ 取得した userId:", userId);
+  
+              const resultPageUrl = `/result.html?userId=${userId}`;
+              window.location.href = resultPageUrl;
+          } catch (error) {
+              console.error("❌ LIFF初期化エラー:", error);
+          }
+      }
+  
+      window.onload = initializeLIFF;
+  </script>
+  
 </body>
 </html> 
