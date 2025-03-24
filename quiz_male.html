@@ -256,7 +256,7 @@
 
         <form id="quiz-form" action="result.html" method="GET">
             <div id="questions"></div>
-            <button class="btn" type="submit" id="submit-btn">診断結果を見る</button>
+            <button class="btn" type="submit">診断結果を見る</button>
         </form>
     </main>
 
@@ -406,8 +406,8 @@
         });
 
         // フォーム送信時の処理
-        document.getElementById('quiz-form').addEventListener('submit', function(e) {
-            e.preventDefault();
+        document.getElementById('quiz-form').onsubmit = function(event) {
+            event.preventDefault();
             
             // すべての質問に回答されているか確認
             const unansweredQuestions = questions.reduce((acc, _, index) => {
@@ -466,7 +466,7 @@
 
             // 結果ページへリダイレクト
             window.location.href = `result.html?${params.toString()}`;
-        });
+        };
 
         // 初期進捗状況を表示
         updateProgress();
