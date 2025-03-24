@@ -410,6 +410,19 @@
         document.getElementById('quiz-form').addEventListener('submit', function(e) {
             e.preventDefault();
             
+            // すべての質問に回答されているか確認
+            const unansweredQuestions = questions.reduce((acc, _, index) => {
+                if (!document.querySelector(`input[name="q${index}"]:checked`)) {
+                    acc.push(index + 1);
+                }
+                return acc;
+            }, []);
+
+            if (unansweredQuestions.length > 0) {
+                alert(`以下の質問に回答してください：\n質問 ${unansweredQuestions.join(', ')}`);
+                return;
+            }
+            
             let scores = { king: 0, knight: 0, star: 0 };
             
             questions.forEach((question, index) => {
