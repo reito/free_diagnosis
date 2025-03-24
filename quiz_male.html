@@ -436,11 +436,24 @@
             };
 
             // URLからuserIdを取得
-            const urlParams = new URLSearchParams(window.location.search);
-            const userId = urlParams.get('userId');
+            const currentParams = new URLSearchParams(window.location.search);
+            const userId = currentParams.get('userId');
+
+            // 結果ページへのパラメータを設定
+            const params = new URLSearchParams({
+                result: typeMapping[resultType],
+                king: normalizedScores.king,
+                knight: normalizedScores.knight,
+                star: normalizedScores.star,
+                gender: 'male'
+            });
+
+            if (userId) {
+                params.append('userId', userId);
+            }
 
             // 結果ページへリダイレクト
-            window.location.href = `result.html?result=${typeMapping[resultType]}&king=${normalizedScores.king}&knight=${normalizedScores.knight}&star=${normalizedScores.star}&gender=male&userId=${userId}`;
+            window.location.href = `result.html?${params.toString()}`;
         });
 
         // 初期進捗状況を表示

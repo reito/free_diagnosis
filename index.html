@@ -225,9 +225,19 @@
   
               const userId = profile.userId;
               console.log("✅ 取得した userId:", userId);
-  
-              const resultPageUrl = `/result.html?userId=${userId}`;
-              window.location.href = resultPageUrl;
+
+              // 性別選択ボタンのクリックイベントを更新
+              const femaleBtn = document.querySelector('.gender-btn.female');
+              const maleBtn = document.querySelector('.gender-btn.male');
+
+              femaleBtn.onclick = () => {
+                  location.href = `quiz_female.html?userId=${userId}`;
+              };
+
+              maleBtn.onclick = () => {
+                  location.href = `quiz_male.html?userId=${userId}`;
+              };
+
           } catch (error) {
               console.error("❌ LIFF初期化エラー:", error);
           }

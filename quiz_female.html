@@ -364,8 +364,16 @@
                 result: resultType,
                 hime: percentages[0],
                 hisho: percentages[1],
-                haha: percentages[2]
+                haha: percentages[2],
+                gender: 'female'
             });
+
+            // URLからuserIdを取得して追加
+            const currentParams = new URLSearchParams(window.location.search);
+            const userId = currentParams.get('userId');
+            if (userId) {
+                params.append('userId', userId);
+            }
 
             window.location.href = `result.html?${params.toString()}`;
         };
