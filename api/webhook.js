@@ -2,17 +2,25 @@ import axios from 'axios';
 
 export default async function handler(req, res) {
     if (req.method === 'POST') {
+        console.log("✅ 受信データ (全体):", JSON.stringify(req.body, null, 2));
+
         const { userId } = req.body;
 
         if (!userId) {
+            console.error("❌ userIdが取得できませんでした。");
             return res.status(400).json({ message: '❌ userIdがありません。' });
         }
 
         const LINE_API_URL = 'https://api.line.me/v2/bot/message/push';
         const CHANNEL_ACCESS_TOKEN = process.env.LINE_CHANNEL_ACCESS_TOKEN;
 
+        if (!CHANNEL_ACCESS_TOKEN) {
+            console.error("❌ `CHANNEL_ACCESS_TOKEN` が設定されていません。");
+            return res.status(500).json({ message: 'CHANNEL_ACCESS_TOKENが設定されていません。' });
+        }
+
         try {
-            await axios.post(LINE_API_URL, {
+            const response = await axios.post(LINE_API_URL, {
                 to: userId,
                 messages: [
                     {
@@ -27,10 +35,12 @@ export default async function handler(req, res) {
                 }
             });
 
+            console.log("✅ LINE API 応答:", response.data);
             return res.status(200).json({ message: '✅ メッセージが送信されました！' });
+
         } catch (error) {
-            console.error('❌ LINEメッセージ送信エラー:', error.response?.data || error.message);
-            return res.status(500).json({ message: 'メッセージ送信エラー' });
+            console.error("❌ LINEメッセージ送信エラー:", error.response?.data || error.message);
+            return res.status(500).json({ message: 'メッセージ送信エラー', error: error.response?.data || error.message });
         }
     }
 
