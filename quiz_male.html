@@ -377,15 +377,15 @@
             questionDiv.innerHTML = `
                 <p>Q${index + 1}. ${question.text}</p>
                 <label>
-                    <input type="radio" name="q${index}" value="2" required>
+                    <input type="radio" name="q${index}" value="yes">
                     そう思う
                 </label>
                 <label>
-                    <input type="radio" name="q${index}" value="1">
+                    <input type="radio" name="q${index}" value="neutral">
                     どちらとも言えない
                 </label>
                 <label>
-                    <input type="radio" name="q${index}" value="0">
+                    <input type="radio" name="q${index}" value="no">
                     そう思わない
                 </label>
             `;
@@ -425,10 +425,16 @@
             let scores = { king: 0, knight: 0, star: 0 };
             
             questions.forEach((question, index) => {
-                const answer = parseInt(document.querySelector(`input[name="q${index}"]:checked`).value);
-                scores.king += question.scores.king * answer;
-                scores.knight += question.scores.knight * answer;
-                scores.star += question.scores.star * answer;
+                const answer = document.querySelector(`input[name="q${index}"]:checked`);
+                if (answer.value === "yes") {
+                    scores.king += question.scores.king;
+                    scores.knight += question.scores.knight;
+                    scores.star += question.scores.star;
+                } else if (answer.value === "neutral") {
+                    scores.king += question.scores.king / 2;
+                    scores.knight += question.scores.knight / 2;
+                    scores.star += question.scores.star / 2;
+                }
             });
 
             // スコアを100点満点に正規化
