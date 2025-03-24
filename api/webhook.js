@@ -2,10 +2,13 @@ import axios from 'axios';
 
 export default async function handler(req, res) {
     if (req.method === 'POST') {
+        console.log("✅ 受信データ (全体):", JSON.stringify(req.body, null, 2));
+
         const { userId } = req.body;
 
         if (!userId) {
-            return res.status(400).json({ message: '❌ userIdがありません。' });
+            console.error("❌ userIdが取得できませんでした。");
+            return res.status(400).json({ message: 'userIdがありません。' });
         }
 
         const LINE_API_URL = 'https://api.line.me/v2/bot/message/push';
@@ -27,12 +30,14 @@ export default async function handler(req, res) {
                 }
             });
 
-            return res.status(200).json({ message: '✅ メッセージが送信されました！' });
+            console.log("✅ メッセージが送信されました！");
+            return res.status(200).json({ message: 'メッセージが送信されました！' });
+
         } catch (error) {
-            console.error('❌ LINEメッセージ送信エラー:', error.response?.data || error.message);
+            console.error("❌ LINEメッセージ送信エラー:", error.response?.data || error.message);
             return res.status(500).json({ message: 'メッセージ送信エラー' });
         }
     }
 
-    res.status(405).json({ message: '❌ Method Not Allowed' });
+    res.status(405).json({ message: 'Method Not Allowed' });
 }
