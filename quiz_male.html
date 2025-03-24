@@ -256,7 +256,7 @@
 
         <form id="quiz-form" action="result.html" method="GET">
             <div id="questions"></div>
-            <button class="btn" type="submit" id="submit-btn" disabled>診断結果を見る</button>
+            <button class="btn" type="submit" id="submit-btn">診断結果を見る</button>
         </form>
     </main>
 
@@ -398,7 +398,6 @@
             answeredCount.textContent = answered;
             const progress = (answered / questions.length) * 100;
             document.getElementById('progressBarFill').style.width = `${progress}%`;
-            submitBtn.disabled = answered < questions.length;
         }
 
         // ラジオボタンの変更を監視
