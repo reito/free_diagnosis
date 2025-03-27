@@ -339,7 +339,7 @@
                 return;
             }
 
-            let scores = [0, 0, 0]; // [プリンセス度, クイーン度, エンジェル度]
+            let scores = [0, 0, 0]; // [プリンセス度, クール度, ナース度]
 
             questions.forEach((q, index) => {
                 const answer = document.querySelector(`input[name="q${index}"]:checked`);
@@ -357,7 +357,7 @@
             const total = scores.reduce((a, b) => a + b, 0);
             const percentages = scores.map(score => Math.round((score / total) * 100));
 
-            const types = ["プリンセスタイプ", "クイーンタイプ", "エンジェルタイプ"];
+            const types = ["プリンセスタイプ", "クールタイプ", "ナースタイプ"];
             const resultType = types[scores.indexOf(Math.max(...scores))];
 
             const params = new URLSearchParams({
