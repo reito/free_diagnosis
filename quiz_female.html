@@ -250,7 +250,7 @@
                 <div class="progress-bar-fill" id="progressBarFill"></div>
             </div>
             <p class="progress-percentage" style="margin-top: 10px; font-size: 14px; color: #666;">
-                回答済み: <span id="answeredCount">0</span> / <span id="totalQuestions">25</span> 問
+                回答済み: <span id="answeredCount">0</span> / <span id="totalQuestions">30</span> 問
             </p>
         </div>
 
@@ -286,7 +286,12 @@
             { text: "男性には言いたいことが言えず、ついつい我慢してしまう。", scores: [0, 2, 0] },
             { text: "恋人とは「特別な日に特別な場所へ行きたい」と思う。", scores: [2, 0, 0] },
             { text: "仕事や家事などは効率的にこなすタイプだ。", scores: [0, 2, 0] },
-            { text: "よく道を聞かれることが多い。", scores: [0, 0, 2] }
+            { text: "よく道を聞かれることが多い。", scores: [0, 0, 2] },
+            { text: "歩く時は人の右側を歩きたい。", scores: [2, 0, 0] },
+            { text: "頭ポンポンされるのは正直いやだと感じる。", scores: [0, 2, 0] },
+            { text: "負ける勝負はしたくない。", scores: [0, 2, 0] },
+            { text: "即断即決する事が苦手だと思う。", scores: [0, 0, 2] },
+            { text: "人の目が気になる方である。", scores: [0, 0, 2] }
         ];
 
         const quizDiv = document.getElementById("quiz");
@@ -357,7 +362,7 @@
             const total = scores.reduce((a, b) => a + b, 0);
             const percentages = scores.map(score => Math.round((score / total) * 100));
 
-            const types = ["プリンセスタイプ", "クールタイプ", "ナースタイプ"];
+            const types = ["アイドルタイプ", "バリキャリタイプ", "ナースタイプ"];
             const resultType = types[scores.indexOf(Math.max(...scores))];
 
             const params = new URLSearchParams({

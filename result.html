@@ -75,7 +75,7 @@
             margin-bottom: 30px;
             color: #456;
             line-height: 1.8;
-            text-align: center;
+            text-align: left;
             padding: 0 15px;
         }
 
@@ -258,37 +258,37 @@
         // キャラクター画像のマッピング
         const characterImages = {
             "キングタイプ": {
-                image: "img/%E6%8A%98%E8%B3%80%E6%AD%A3%E7%BE%A9.JPG",
-                name: "折賀 正義"
+                image: "img/king_type.png",
+                name: "キングタイプ"
             },
             "ナイトタイプ": {
-                image: "img/%E7%90%86%E7%9F%A5%E8%AA%A0%E5%AE%9F.JPG",
-                name: "理知 誠実"
+                image: "img/knight_type.png",
+                name: "ナイトタイプ"
             },
             "プリンスタイプ": {
-                image: "img/%E9%9F%BF%E8%8C%82%E8%87%AA%E7%94%B1.JPG",
-                name: "響茂 自由"
+                image: "img/prince_type.png",
+                name: "プリンスタイプ"
             },
-            "プリンセスタイプ": {
-                image: "img/%E6%84%9B%E9%87%8E%E3%81%8D%E3%82%89%E3%82%89.JPG",
-                name: "愛野 きらら"
+            "アイドルタイプ": {
+                image: "img/idol_type.png",
+                name: "アイドルタイプ"
             },
-            "クールタイプ": {
-                image: "img/%E8%8A%BD%E5%BA%A7%E7%80%AC%E3%81%9F%E3%81%8B%E3%81%BF.JPG",
-                name: "芽座瀬 たかみ"
+            "バリキャリタイプ": {
+                image: "img/career_type.png",
+                name: "バリキャリタイプ"
             },
             "ナースタイプ": {
-                image: "img/%E9%80%B8%E8%90%8C%E9%9D%99%E9%A6%99.JPG",
-                name: "逸萌 静香"
+                image: "img/nurse_type.png",
+                name: "ナースタイプ"
             },
             "バランスタイプ": {
                 male: {
-                    image: "img/%E7%94%B7%E6%80%A7_%E3%83%90%E3%83%A9%E3%83%B3%E3%82%B9.png",
-                    name: "バランスタイプ"
+                    image: "img/balance_type_male.png",
+                    name: "バランスタイプ（男性）"
                 },
                 female: {
-                    image: "img/%E5%A5%B3%E6%80%A7_%E3%83%90%E3%83%A9%E3%83%B3%E3%82%B9.png",
-                    name: "バランスタイプ"
+                    image: "img/balance_type_female.png",
+                    name: "バランスタイプ（女性）"
                 }
             }
         };
@@ -334,11 +334,12 @@
         // 診断結果の説明テキスト
         const descriptions = {
             // 女性向けの説明
-            "プリンセスタイプ": "尽くされることで愛情を感じ、恋愛では「特別扱い」を求める傾向が強いです。",
-            "クールタイプ": "自立心が強く、自分で物事を解決する頼もしいタイプです。",
-            "ナースタイプ": "世話好きで、相手のために尽くしてしまう愛情深いタイプです。",
-            "バランスタイプ": "甘え上手・頼られ上手・世話好きの要素をバランスよく持ち、相手に応じて柔軟に対応できます。ただし自分の気持ちを大切にすることも忘れずに。",
-            
+            "アイドルタイプ": "アイドルタイプ寄りのあなたは、人から大切にされることに幸せを感じる「愛されキャラ」。明るく可憐な雰囲気で、自然と人の視線を集める存在です。自分の感情を素直に表現できるため、一緒にいる人に安心感とときめきを与えることができます。<br><br>【強み】<br>あなたの最大の魅力は、そのままでも「愛される力」。喜怒哀楽がハッキリしていて、相手にとってはわかりやすく、親しみやすい存在です。恋愛では、自分の気持ちを素直に伝えられることが強みとなり、相手との距離を一気に縮めることができます。<br><br>【気をつけたい点】<br>「もっと愛されたい」という思いが強くなりすぎると、依存的になったり、不安定さが表に出ることも。特別扱いされないと不満に感じる傾向があるため、自分の中に「愛されていなくても自分は価値がある」という基準を持つことが大切です。",
+
+            "バリキャリタイプ": "バリキャリタイプ寄りのあなたは、冷静で判断力に優れた頼れる存在。常に落ち着いた雰囲気をまとい、周囲からの信頼も厚いタイプです。感情よりも理性を大切にし、計画的かつ論理的に物事を進める姿勢が印象的です。<br><br>【強み】<br>自分の軸があり、物事にブレずに取り組める力が最大の魅力。恋愛でもパートナーと対等に向き合い、堅実な関係を築こうとします。周囲の状況を冷静に把握できるため、信頼される存在として長く愛される傾向があります。<br><br>【気をつけたい点】<br>しっかりしている反面、「隙がない」「近寄りがたい」と見られてしまうことも。また、感情をあまり表に出さないため、「何を考えているのかわからない」と思われることもあります。ときには素直な弱さを見せることが、信頼関係を深める一歩になるかもしれません。",
+
+            "ナースタイプ": "ナースタイプ寄りのあなたは、人の世話を焼くのが得意で、自然と周囲を癒せる存在。包容力があり、相手を思いやる気持ちが深く、優しさにあふれています。落ち着いた雰囲気と、相手の気持ちに寄り添う力をあわせ持つ、心の支えのような人です。<br><br>【強み】<br>誰に対しても優しく、受け入れる器の大きさがあなたの魅力です。恋愛でも「安心できる相手」として信頼されることが多く、自然体で接することで相手をリラックスさせる力を持っています。思いやりと細やかな配慮が、安定した関係性を築く鍵になります。<br><br>【気をつけたい点】<br>人に尽くしすぎて、自分を後回しにしてしまうことも。相手に合わせすぎるあまり、「都合のいい存在」になってしまう可能性もあります。自分自身の気持ちや欲求も大切にし、「自分の幸せ」についてもしっかり考えることが大切です。",
+
             // 男性向けの説明
             "キングタイプ": "リーダーシップがあり、自分の意見をしっかり持っている頼もしいタイプです。",
             "ナイトタイプ": "誠実で思いやりがあり、相手の気持ちに寄り添える優しいタイプです。",
@@ -363,6 +364,12 @@
             const characterImage = document.getElementById("character-image");
             const characterName = document.getElementById("character-name");
             const balanceImage = characterImages["バランスタイプ"][gender];
+            console.log("Loading balanced image:", balanceImage.image);
+            characterImage.onerror = function() {
+                console.error("Failed to load image:", this.src);
+                // フォールバック: エラー時に別の画像を試す
+                this.src = encodeURI(balanceImage.image);
+            };
             characterImage.src = balanceImage.image;
             characterImage.alt = balanceImage.name;
             characterName.textContent = balanceImage.name;
@@ -370,6 +377,12 @@
         } else if (characterImages[displayType]) {
             const characterImage = document.getElementById("character-image");
             const characterName = document.getElementById("character-name");
+            console.log("Loading type image:", characterImages[displayType].image);
+            characterImage.onerror = function() {
+                console.error("Failed to load image:", this.src);
+                // フォールバック: エラー時に別の画像を試す
+                this.src = encodeURI(characterImages[displayType].image);
+            };
             characterImage.src = characterImages[displayType].image;
             characterImage.alt = characterImages[displayType].name;
             characterName.textContent = characterImages[displayType].name;
