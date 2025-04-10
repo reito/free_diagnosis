@@ -254,7 +254,7 @@
             </p>
         </div>
 
-        <form id="quizForm" action="result.html" method="GET">
+        <form id="quiz-form" action="result.html" method="GET">
             <div id="quiz"></div>
             <button class="btn" type="submit">診断結果を見る</button>
         </form>
@@ -262,36 +262,36 @@
 
     <script>
         const questions = [
-            { text: "飲み会で初対面の人と話すのは得意？", scores: [2, 0, 0] },
-            { text: "自分の話をするより人の話を聞く方が楽しい。", scores: [0, 0, 2] },
-            { text: "毎日LINEをするのは面倒くさいと感じる。", scores: [0, 2, 0] },
-            { text: "飲み会の席ではつい気配りして料理を取り分ける？", scores: [0, 0, 2] },
-            { text: "相手に尽くすよりも、自分が尽くされる方が嬉しい？", scores: [2, 0, 0] },
-            { text: "たまに自分が何をしたいのかわからなくなる時がある。", scores: [0, 0, 2] },
-            { text: "計画を立てたり、スケジュール管理が好きだ。", scores: [0, 2, 0] },
-            { text: "パートナーには優しく甘えさせてほしいと思う。", scores: [2, 0, 0] },
-            { text: "自分のやるべきことはきっちりこなさないと気が済まない。", scores: [0, 2, 0] },
-            { text: "誰かが困っていたら放っておけない。", scores: [0, 0, 2] },
-            { text: "特別扱いをされると嬉しい。", scores: [2, 0, 0] },
-            { text: "人に頼るのは苦手で、自分でなんとかしようとする。", scores: [0, 2, 0] },
-            { text: "カバンの中身が多くなりがち。", scores: [0, 0, 2] },
-            { text: "デートのプランは相手に考えてほしい。", scores: [2, 0, 0] },
-            { text: "問題が起きた時、自分が主導して解決しようとする。", scores: [0, 2, 0] },
-            { text: "夢を持っている男性が好き。", scores: [0, 2, 0] },
-            { text: "サプライズやプレゼントが好きで、相手に期待してしまう。", scores: [2, 0, 0] },
-            { text: "洋服や鞄は可愛いものよりも機能性を重視する。", scores: [0, 2, 0] },
-            { text: "自分の気持ちよりも、周りの人の意見を優先することが多い。", scores: [0, 0, 2] },
-            { text: "流行には敏感な方である。", scores: [2, 0, 0] },
-            { text: "相手が少し偉そうでも優柔不断な人よりマシと思う", scores: [0, 0, 2] },
-            { text: "男性には言いたいことが言えず、ついつい我慢してしまう。", scores: [0, 2, 0] },
-            { text: "恋人とは「特別な日に特別な場所へ行きたい」と思う。", scores: [2, 0, 0] },
-            { text: "仕事や家事などは効率的にこなすタイプだ。", scores: [0, 2, 0] },
-            { text: "よく道を聞かれることが多い。", scores: [0, 0, 2] },
-            { text: "歩く時は人の右側を歩きたい。", scores: [2, 0, 0] },
-            { text: "頭ポンポンされるのは正直いやだと感じる。", scores: [0, 2, 0] },
-            { text: "負ける勝負はしたくない。", scores: [0, 2, 0] },
-            { text: "即断即決する事が苦手だと思う。", scores: [0, 0, 2] },
-            { text: "人の目が気になる方である。", scores: [0, 0, 2] }
+            { text: "飲み会で初対面の人と話すのは得意？", scores: { idol: 2, career: 0, nurse: 0 } },
+            { text: "自分の話をするより人の話を聞く方が楽しい。", scores: { idol: 0, career: 0, nurse: 2 } },
+            { text: "毎日LINEをするのは面倒くさいと感じる。", scores: { idol: 0, career: 2, nurse: 0 } },
+            { text: "飲み会の席ではつい気配りして料理を取り分ける？", scores: { idol: 0, career: 0, nurse: 2 } },
+            { text: "相手に尽くすよりも、自分が尽くされる方が嬉しい？", scores: { idol: 2, career: 0, nurse: 0 } },
+            { text: "たまに自分が何をしたいのかわからなくなる時がある。", scores: { idol: 0, career: 0, nurse: 2 } },
+            { text: "計画を立てたり、スケジュール管理が好きだ。", scores: { idol: 0, career: 2, nurse: 0 } },
+            { text: "パートナーには優しく甘えさせてほしいと思う。", scores: { idol: 2, career: 0, nurse: 0 } },
+            { text: "自分のやるべきことはきっちりこなさないと気が済まない。", scores: { idol: 0, career: 2, nurse: 0 } },
+            { text: "誰かが困っていたら放っておけない。", scores: { idol: 0, career: 0, nurse: 2 } },
+            { text: "特別扱いをされると嬉しい。", scores: { idol: 2, career: 0, nurse: 0 } },
+            { text: "人に頼るのは苦手で、自分でなんとかしようとする。", scores: { idol: 0, career: 2, nurse: 0 } },
+            { text: "カバンの中身が多くなりがち。", scores: { idol: 0, career: 0, nurse: 2 } },
+            { text: "デートのプランは相手に考えてほしい。", scores: { idol: 2, career: 0, nurse: 0 } },
+            { text: "問題が起きた時、自分が主導して解決しようとする。", scores: { idol: 0, career: 2, nurse: 0 } },
+            { text: "夢を持っている男性が好き。", scores: { idol: 0, career: 2, nurse: 0 } },
+            { text: "サプライズやプレゼントが好きで、相手に期待してしまう。", scores: { idol: 2, career: 0, nurse: 0 } },
+            { text: "洋服や鞄は可愛いものよりも機能性を重視する。", scores: { idol: 0, career: 2, nurse: 0 } },
+            { text: "自分の気持ちよりも、周りの人の意見を優先することが多い。", scores: { idol: 0, career: 0, nurse: 2 } },
+            { text: "流行には敏感な方である。", scores: { idol: 2, career: 0, nurse: 0 } },
+            { text: "相手が少し偉そうでも優柔不断な人よりマシと思う", scores: { idol: 0, career: 0, nurse: 2 } },
+            { text: "男性には言いたいことが言えず、ついつい我慢してしまう。", scores: { idol: 0, career: 2, nurse: 0 } },
+            { text: "恋人とは「特別な日に特別な場所へ行きたい」と思う。", scores: { idol: 2, career: 0, nurse: 0 } },
+            { text: "仕事や家事などは効率的にこなすタイプだ。", scores: { idol: 0, career: 2, nurse: 0 } },
+            { text: "よく道を聞かれることが多い。", scores: { idol: 0, career: 0, nurse: 2 } },
+            { text: "歩く時は人の右側を歩きたい。", scores: { idol: 2, career: 0, nurse: 0 } },
+            { text: "頭ポンポンされるのは正直いやだと感じる。", scores: { idol: 0, career: 2, nurse: 0 } },
+            { text: "負ける勝負はしたくない。", scores: { idol: 0, career: 2, nurse: 0 } },
+            { text: "即断即決する事が苦手だと思う。", scores: { idol: 0, career: 0, nurse: 2 } },
+            { text: "人の目が気になる方である。", scores: { idol: 0, career: 0, nurse: 2 } }
         ];
 
         const quizDiv = document.getElementById("quiz");
@@ -328,9 +328,9 @@
             quizDiv.appendChild(questionDiv);
         });
 
-        document.getElementById('quizForm').onsubmit = function(event) {
+        document.getElementById('quiz-form').onsubmit = function(event) {
             event.preventDefault();
-
+            
             // すべての質問に回答されているか確認
             const unansweredQuestions = questions.reduce((acc, _, index) => {
                 if (!document.querySelector(`input[name="q${index}"]:checked`)) {
@@ -343,43 +343,65 @@
                 alert(`以下の質問に回答してください：\n質問 ${unansweredQuestions.join(', ')}`);
                 return;
             }
-
-            let scores = [0, 0, 0]; // [プリンセス度, クール度, ナース度]
-
-            questions.forEach((q, index) => {
+            
+            // 各タイプの質問数をカウント
+            const totalQuestions = {
+                idol: questions.filter(q => q.scores.idol > 0).length,
+                career: questions.filter(q => q.scores.career > 0).length,
+                nurse: questions.filter(q => q.scores.nurse > 0).length
+            };
+            
+            // 各タイプの「そう思う」の回答数をカウント
+            let selectedAnswers = { idol: 0, career: 0, nurse: 0 };
+            
+            questions.forEach((question, index) => {
                 const answer = document.querySelector(`input[name="q${index}"]:checked`);
                 if (answer.value === "yes") {
-                    scores[0] += q.scores[0];
-                    scores[1] += q.scores[1];
-                    scores[2] += q.scores[2];
-                } else if (answer.value === "neutral") {
-                    scores[0] += q.scores[0] / 2;
-                    scores[1] += q.scores[1] / 2;
-                    scores[2] += q.scores[2] / 2;
-                } 
+                    if (question.scores.idol > 0) selectedAnswers.idol++;
+                    if (question.scores.career > 0) selectedAnswers.career++;
+                    if (question.scores.nurse > 0) selectedAnswers.nurse++;
+                }
+                // どちらとも言えないは0.5カウント
+                else if (answer.value === "neutral") {
+                    if (question.scores.idol > 0) selectedAnswers.idol += 0.5;
+                    if (question.scores.career > 0) selectedAnswers.career += 0.5;
+                    if (question.scores.nurse > 0) selectedAnswers.nurse += 0.5;
+                }
             });
 
-            const total = scores.reduce((a, b) => a + b, 0);
-            const percentages = scores.map(score => Math.round((score / total) * 100));
+            // パーセンテージを計算
+            const percentages = {
+                idol: Math.round((selectedAnswers.idol / totalQuestions.idol) * 100),
+                career: Math.round((selectedAnswers.career / totalQuestions.career) * 100),
+                nurse: Math.round((selectedAnswers.nurse / totalQuestions.nurse) * 100)
+            };
 
-            const types = ["アイドルタイプ", "バリキャリタイプ", "ナースタイプ"];
-            const resultType = types[scores.indexOf(Math.max(...scores))];
+            // 最も高いパーセンテージのタイプを決定
+            let resultType = Object.entries(percentages).reduce((a, b) => a[1] > b[1] ? a : b)[0];
+            let typeMapping = {
+                'idol': 'アイドルタイプ',
+                'career': 'バリキャリタイプ',
+                'nurse': 'ナースタイプ'
+            };
 
+            // URLからuserIdを取得
+            const currentParams = new URLSearchParams(window.location.search);
+            const userId = currentParams.get('userId');
+
+            // 結果ページへのパラメータを設定
             const params = new URLSearchParams({
-                result: resultType,
-                hime: percentages[0],
-                hisho: percentages[1],
-                haha: percentages[2],
+                result: typeMapping[resultType],
+                idol: percentages.idol,
+                career: percentages.career,
+                nurse: percentages.nurse,
                 gender: 'female'
             });
 
-            // URLからuserIdを取得して追加
-            const currentParams = new URLSearchParams(window.location.search);
-            const userId = currentParams.get('userId');
             if (userId) {
                 params.append('userId', userId);
             }
 
+            // 結果ページへリダイレクト
             window.location.href = `result.html?${params.toString()}`;
         };
 

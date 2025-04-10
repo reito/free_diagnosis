@@ -228,6 +228,42 @@
                 width: 150px;
             }
         }
+
+        .result-graphs {
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(106, 193, 208, 0.1);
+        }
+
+        .graph-container {
+            margin: 20px 0;
+        }
+
+        .graph-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        .graph-bar {
+            width: 100%;
+            height: 24px;
+            background: #e9f5f7;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .graph-fill {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(135deg, #6ac1d0 0%, #5fb5d0 100%);
+            transition: width 1s ease;
+        }
     </style>
 </head>
 <body>
@@ -239,6 +275,36 @@
         <div id="character-container">
             <img id="character-image" class="character-image" alt="キャラクター">
             <div id="character-name" class="character-name"></div>
+        </div>
+
+        <div class="result-graphs">
+            <div class="graph-container">
+                <div class="graph-label">
+                    <span id="type1-label"></span>
+                    <span id="type1-percentage"></span>%
+                </div>
+                <div class="graph-bar">
+                    <div class="graph-fill" id="type1-bar"></div>
+                </div>
+            </div>
+            <div class="graph-container">
+                <div class="graph-label">
+                    <span id="type2-label"></span>
+                    <span id="type2-percentage"></span>%
+                </div>
+                <div class="graph-bar">
+                    <div class="graph-fill" id="type2-bar"></div>
+                </div>
+            </div>
+            <div class="graph-container">
+                <div class="graph-label">
+                    <span id="type3-label"></span>
+                    <span id="type3-percentage"></span>%
+                </div>
+                <div class="graph-bar">
+                    <div class="graph-fill" id="type3-bar"></div>
+                </div>
+            </div>
         </div>
 
         <p class="cta-text">あなたのタイプに合わせたアドバイスで<br>理想のパートナーとの出会いをグッと引き寄せます！<br>まずはお気軽にご相談ください😊</p>
@@ -294,33 +360,32 @@
         };
 
         // URLから診断結果とスコア情報を取得
-        const params = new URLSearchParams(window.location.search);
-        const resultType = params.get('result');
-        const gender = params.get('gender') || 'female';
+        const urlParams = new URLSearchParams(window.location.search);
+        const resultType = urlParams.get('result');
+        const userGender = urlParams.get('gender') || 'female';
         
         // 性別に応じてスコアのパラメータ名を取得
-        const scores = gender === 'male' 
+        const scores = userGender === 'male' 
             ? {
-                king: parseInt(params.get('king')) || 0,
-                knight: parseInt(params.get('knight')) || 0,
-                star: parseInt(params.get('star')) || 0
+                king: parseInt(urlParams.get('king')) || 0,
+                knight: parseInt(urlParams.get('knight')) || 0,
+                prince: parseInt(urlParams.get('prince')) || 0
             }
             : {
-                hime: parseInt(params.get('hime')) || 0,
-                hisho: parseInt(params.get('hisho')) || 0,
-                haha: parseInt(params.get('haha')) || 0
+                idol: parseInt(urlParams.get('idol')) || 0,
+                career: parseInt(urlParams.get('career')) || 0,
+                nurse: parseInt(urlParams.get('nurse')) || 0
             };
 
         // バランスタイプの判定を行う関数
         function isBalancedType(scores, gender) {
             if (gender === 'male') {
-                const values = [scores.king, scores.knight, scores.star];
+                const values = [scores.king, scores.knight, scores.prince];
                 const max = Math.max(...values);
                 const min = Math.min(...values);
-                // 最大値と最小値の差が5%以内であればバランスタイプと判定
                 return (max - min) <= 5;
             } else {
-                const values = [scores.hime, scores.hisho, scores.haha];
+                const values = [scores.idol, scores.career, scores.nurse];
                 const max = Math.max(...values);
                 const min = Math.min(...values);
                 return (max - min) <= 5;
@@ -328,7 +393,7 @@
         }
 
         // バランスタイプかどうかを判定
-        const isBalanced = isBalancedType(scores, gender);
+        const isBalanced = isBalancedType(scores, userGender);
         const displayType = isBalanced ? "バランスタイプ" : resultType;
 
         // 診断結果の説明テキスト
@@ -352,9 +417,9 @@
         document.getElementById("resultText").textContent = descriptions[displayType];
         
         // スコアの表示テキストを性別に応じて変更
-        const percentageText = gender === 'male'
-            ? `キング度: ${scores.king}% / ナイト度: ${scores.knight}% / プリンス度: ${scores.star}%`
-            : `プリンセス度: ${scores.hime}% / クール度: ${scores.hisho}% / ナース度: ${scores.haha}%`;
+        const percentageText = userGender === 'male'
+            ? `キング度: ${scores.king}% / ナイト度: ${scores.knight}% / プリンス度: ${scores.prince}%`
+            : `アイドル度: ${scores.idol}% / バリキャリ度: ${scores.career}% / ナース度: ${scores.nurse}%`;
         
         document.getElementById("percentages").textContent = percentageText;
 
@@ -363,7 +428,7 @@
         if (isBalanced) {
             const characterImage = document.getElementById("character-image");
             const characterName = document.getElementById("character-name");
-            const balanceImage = characterImages["バランスタイプ"][gender];
+            const balanceImage = characterImages["バランスタイプ"][userGender];
             console.log("Loading balanced image:", balanceImage.image);
             characterImage.onerror = function() {
                 console.error("Failed to load image:", this.src);
@@ -389,6 +454,35 @@
             characterContainer.style.display = "block";
         } else {
             characterContainer.style.display = "none";
+        }
+
+        // グラフの表示処理
+        if (userGender === 'female') {
+            // 女性の場合
+            document.getElementById('type1-label').textContent = 'アイドルタイプ';
+            document.getElementById('type2-label').textContent = 'バリキャリタイプ';
+            document.getElementById('type3-label').textContent = 'ナースタイプ';
+            
+            document.getElementById('type1-percentage').textContent = urlParams.get('idol');
+            document.getElementById('type2-percentage').textContent = urlParams.get('career');
+            document.getElementById('type3-percentage').textContent = urlParams.get('nurse');
+            
+            document.getElementById('type1-bar').style.width = urlParams.get('idol') + '%';
+            document.getElementById('type2-bar').style.width = urlParams.get('career') + '%';
+            document.getElementById('type3-bar').style.width = urlParams.get('nurse') + '%';
+        } else {
+            // 男性の場合
+            document.getElementById('type1-label').textContent = 'キングタイプ';
+            document.getElementById('type2-label').textContent = 'ナイトタイプ';
+            document.getElementById('type3-label').textContent = 'プリンスタイプ';
+            
+            document.getElementById('type1-percentage').textContent = urlParams.get('king');
+            document.getElementById('type2-percentage').textContent = urlParams.get('knight');
+            document.getElementById('type3-percentage').textContent = urlParams.get('prince');
+            
+            document.getElementById('type1-bar').style.width = urlParams.get('king') + '%';
+            document.getElementById('type2-bar').style.width = urlParams.get('knight') + '%';
+            document.getElementById('type3-bar').style.width = urlParams.get('prince') + '%';
         }
     </script>
 </body>
