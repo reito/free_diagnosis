@@ -456,12 +456,8 @@
             });
         }
         
-        // スコアの表示テキストを性別に応じて変更
-        const percentageText = userGender === 'male'
-            ? `キング度: ${scores.king}% / ナイト度: ${scores.knight}% / プリンス度: ${scores.prince}%`
-            : `アイドル度: ${scores.idol}% / バリキャリ度: ${scores.career}% / ナース度: ${scores.nurse}%`;
-        
-        if (percentagesElement) percentagesElement.textContent = percentageText;
+        // パーセンテージ表示を削除
+        if (percentagesElement) percentagesElement.style.display = 'none';
 
         // キャラクター画像を表示
         const characterContainer = document.getElementById("character-container");
