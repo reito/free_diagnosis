@@ -364,6 +364,16 @@
         const resultType = urlParams.get('result');
         const userGender = urlParams.get('gender') || 'female';
         
+        console.log("URL Parameters:", {
+            resultType,
+            userGender,
+            scores: {
+                king: urlParams.get('king'),
+                knight: urlParams.get('knight'),
+                prince: urlParams.get('prince')
+            }
+        });
+        
         // 性別に応じてスコアのパラメータ名を取得
         const scores = userGender === 'male' 
             ? {
@@ -376,6 +386,8 @@
                 career: parseInt(urlParams.get('career')) || 0,
                 nurse: parseInt(urlParams.get('nurse')) || 0
             };
+
+        console.log("Parsed Scores:", scores);
 
         // バランスタイプの判定を行う関数
         function isBalancedType(scores, gender) {
@@ -395,6 +407,10 @@
         // バランスタイプかどうかを判定
         const isBalanced = isBalancedType(scores, userGender);
         const displayType = isBalanced ? "バランスタイプ" : resultType;
+
+        console.log("Display Type:", displayType);
+        console.log("Is Balanced:", isBalanced);
+        console.log("Available Types:", Object.keys(descriptions));
 
         // 診断結果の説明テキスト
         const descriptions = {
@@ -419,15 +435,33 @@
         };
 
         // 結果を表示
-        document.getElementById("resultType").textContent = `あなたのタイプは「${displayType}」です！`;
-        document.getElementById("resultText").textContent = descriptions[displayType];
+        const resultTypeElement = document.getElementById("resultType");
+        const resultTextElement = document.getElementById("resultText");
+        const percentagesElement = document.getElementById("percentages");
+
+        console.log("DOM Elements:", {
+            resultTypeElement,
+            resultTextElement,
+            percentagesElement
+        });
+
+        if (resultTypeElement) resultTypeElement.textContent = `あなたのタイプは「${displayType}」です！`;
+        if (resultTextElement && descriptions[displayType]) {
+            resultTextElement.innerHTML = descriptions[displayType];
+        } else {
+            console.error("Failed to set description:", {
+                hasElement: !!resultTextElement,
+                hasDescription: !!descriptions[displayType],
+                displayType
+            });
+        }
         
         // スコアの表示テキストを性別に応じて変更
         const percentageText = userGender === 'male'
             ? `キング度: ${scores.king}% / ナイト度: ${scores.knight}% / プリンス度: ${scores.prince}%`
             : `アイドル度: ${scores.idol}% / バリキャリ度: ${scores.career}% / ナース度: ${scores.nurse}%`;
         
-        document.getElementById("percentages").textContent = percentageText;
+        if (percentagesElement) percentagesElement.textContent = percentageText;
 
         // キャラクター画像を表示
         const characterContainer = document.getElementById("character-container");
