@@ -359,6 +359,11 @@
             }
         };
 
+        // URLから診断結果とスコア情報を取得
+        const urlParams = new URLSearchParams(window.location.search);
+        const resultType = urlParams.get('result');
+        const userGender = urlParams.get('gender') || 'female';
+
         // 診断結果の説明テキスト
         const descriptions = {
             // 女性向けの説明
@@ -381,11 +386,6 @@
                 "あなたは、リーダーシップのある一面と、誠実で思いやり深い姿勢、そして自由でフレッシュな魅力を兼ね備えた、バランスの取れた存在です。ひとつの型にハマらず、柔軟に人や場面に応じて対応できる「万能型」と言えるでしょう。<br><br>【強み】<br>恋愛では「頼れる存在」「癒しの存在」「楽しい存在」という三拍子が揃っており、どんなタイプの相手にもフィットしやすいのが特長です。空気を読んで行動できる器用さと、相手の感情を汲み取る優しさがあなたの魅力です。<br><br>【気をつけたい点】<br>多面的であるがゆえに「結局、自分は何を求めているのか」が曖昧になりやすく、相手に合わせすぎて疲れてしまうこともあります。また、自分の理想が明確になっていない可能性もあるため、ときには自分の「本音」と丁寧に向き合ってみましょう。"
         };
 
-        // URLから診断結果とスコア情報を取得
-        const urlParams = new URLSearchParams(window.location.search);
-        const resultType = urlParams.get('result');
-        const userGender = urlParams.get('gender') || 'female';
-        
         console.log("URL Parameters:", {
             resultType,
             userGender,
