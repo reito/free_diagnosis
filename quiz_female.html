@@ -291,8 +291,32 @@
             { text: "頭ポンポンされるのは正直いやだと感じる。", scores: { idol: 0, career: 2, nurse: 0 } },
             { text: "負ける勝負はしたくない。", scores: { idol: 0, career: 2, nurse: 0 } },
             { text: "即断即決する事が苦手だと思う。", scores: { idol: 0, career: 0, nurse: 2 } },
-            { text: "人の目が気になる方である。", scores: { idol: 0, career: 0, nurse: 2 } }
+            { text: "人の目が気になる方である。", scores: { idol: 0, career: 0, nurse: 2 } },
+            // 新しい質問（アイドル）
+            { text: "何かを決める時に直感を重視することが多い。", scores: { idol: 2, career: 0, nurse: 0 } },
+            { text: "容姿や外見についての評価が大切である。", scores: { idol: 2, career: 0, nurse: 0 } },
+            { text: "美容にお金を使うのが好きだ。", scores: { idol: 2, career: 0, nurse: 0 } },
+            { text: "可愛いものやキラキラしたものを見ると欲しくなる。", scores: { idol: 2, career: 0, nurse: 0 } },
+            { text: "男性には経済力を求めてしまう。", scores: { idol: 2, career: 0, nurse: 0 } },
+            // 新しい質問（バリキャリ）
+            { text: "学校や職場ではリーダー的な立場になることが多い。", scores: { idol: 0, career: 2, nurse: 0 } },
+            { text: "考えたことや思いついたことに対しすぐに行動する方だ。", scores: { idol: 0, career: 2, nurse: 0 } },
+            { text: "周りを見ると努力が足りないと感じることが多い。", scores: { idol: 0, career: 2, nurse: 0 } },
+            { text: "結婚しても仕事は続けたいと思っている。", scores: { idol: 0, career: 2, nurse: 0 } },
+            { text: "女性も自律や自活する力が必要だと思う。", scores: { idol: 0, career: 2, nurse: 0 } },
+            // 新しい質問（ナース）
+            { text: "家事をすることは好きな方だ。", scores: { idol: 0, career: 0, nurse: 2 } },
+            { text: "何か頼まれると断れないタイプだと思う。", scores: { idol: 0, career: 0, nurse: 2 } },
+            { text: "結婚したら家庭を優先したい。", scores: { idol: 0, career: 0, nurse: 2 } },
+            { text: "過去に浮気をされて許したことがある。", scores: { idol: 0, career: 0, nurse: 2 } },
+            { text: "パートナーには安定した仕事・収入を求める。", scores: { idol: 0, career: 0, nurse: 2 } }
         ];
+
+        // 質問をシャッフル
+        for (let i = questions.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [questions[i], questions[j]] = [questions[j], questions[i]];
+        }
 
         const quizDiv = document.getElementById("quiz");
         const progressBarFill = document.getElementById("progressBarFill");
@@ -346,9 +370,9 @@
             
             // 各タイプの質問数をカウント
             const totalQuestions = {
-                idol: questions.filter(q => q.scores.idol > 0).length,
-                career: questions.filter(q => q.scores.career > 0).length,
-                nurse: questions.filter(q => q.scores.nurse > 0).length
+                idol: 10,
+                career: 10,
+                nurse: 10
             };
             
             // 各タイプの「そう思う」の回答数をカウント

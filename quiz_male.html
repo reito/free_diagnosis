@@ -381,8 +381,77 @@
             {
                 text: "年上の女性と付き合うことに抵抗がない。",
                 scores: { king: 0, knight: 0, prince: 2 }
+            },
+            // 新しい質問（キング）
+            {
+                text: "普段からオシャレには気を遣っている。",
+                scores: { king: 2, knight: 0, prince: 0 }
+            },
+            {
+                text: "食事などに行った際女性に奢ってもらうのには抵抗がある。",
+                scores: { king: 2, knight: 0, prince: 0 }
+            },
+            {
+                text: "思い立ったらすぐに行動するタイプだと思う。",
+                scores: { king: 2, knight: 0, prince: 0 }
+            },
+            {
+                text: "人から尊敬されたいと思う。",
+                scores: { king: 2, knight: 0, prince: 0 }
+            },
+            {
+                text: "人に謝るのはどちらかというと嫌いだ。",
+                scores: { king: 2, knight: 0, prince: 0 }
+            },
+            // 新しい質問（ナイト）
+            {
+                text: "リーダーの立場より支える立場の方があっていると思う。",
+                scores: { king: 0, knight: 2, prince: 0 }
+            },
+            {
+                text: "女性に対し引っ張るより合わせてしまうことが多い。",
+                scores: { king: 0, knight: 2, prince: 0 }
+            },
+            {
+                text: "家事育児は積極的に協力したいタイプ。",
+                scores: { king: 0, knight: 2, prince: 0 }
+            },
+            {
+                text: "自分よりは相手を優先するタイプ。",
+                scores: { king: 0, knight: 2, prince: 0 }
+            },
+            {
+                text: "衝動的な行動はどちらかというと苦手だ。",
+                scores: { king: 0, knight: 2, prince: 0 }
+            },
+            // 新しい質問（プリンス）
+            {
+                text: "まわりから可愛がられるタイプだと思う。",
+                scores: { king: 0, knight: 0, prince: 2 }
+            },
+            {
+                text: "責任ある仕事や立場にはできるだけ就きたくない",
+                scores: { king: 0, knight: 0, prince: 2 }
+            },
+            {
+                text: "自分より収入の多い女性と付き合うことに抵抗はない方だ。",
+                scores: { king: 0, knight: 0, prince: 2 }
+            },
+            {
+                text: "自分の趣味ややりたいことを優先するタイプだ。",
+                scores: { king: 0, knight: 0, prince: 2 }
+            },
+            {
+                text: "女性に対して求めるのは癒しだ。",
+                scores: { king: 0, knight: 0, prince: 2 }
             }
         ];
+
+        // 質問をシャッフル
+        for (let i = questions.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [questions[i], questions[j]] = [questions[j], questions[i]];
+        }
 
         const questionsContainer = document.getElementById('questions');
         const submitBtn = document.getElementById('submit-btn');
@@ -444,9 +513,9 @@
             
             // 各タイプの質問数をカウント
             const totalQuestions = {
-                king: questions.filter(q => q.scores.king > 0).length,
-                knight: questions.filter(q => q.scores.knight > 0).length,
-                prince: questions.filter(q => q.scores.prince > 0).length
+                king: 10,
+                knight: 10,
+                prince: 10
             };
             
             // 各タイプの「そう思う」の回答数をカウント
