@@ -349,9 +349,9 @@
                 image: "img/career_type.png",
                 name: "バリキャリタイプ"
             },
-            "ナースタイプ": {
-                image: "img/nurse_type.png",
-                name: "ナースタイプ"
+            "マザータイプ": {
+                image: "img/mother_type.png",
+                name: "マザータイプ"
             },
             "バランスタイプ": {
                 male: {
@@ -465,10 +465,16 @@
             const characterImage = document.getElementById("character-image");
             const characterName = document.getElementById("character-name");
             const balanceImage = characterImages["バランスタイプ"][userGender];
-            characterImage.src = balanceImage.image;
-            characterImage.alt = balanceImage.name;
-            characterName.textContent = balanceImage.name;
-            characterContainer.style.display = "block";
+            
+            if (balanceImage) {
+                characterImage.src = balanceImage.image;
+                characterImage.alt = balanceImage.name;
+                characterName.textContent = balanceImage.name;
+                characterContainer.style.display = "block";
+            } else {
+                console.error("バランスタイプの画像が見つかりません");
+                characterContainer.style.display = "none";
+            }
         } else if (characterImages[displayType]) {
             const characterImage = document.getElementById("character-image");
             const characterName = document.getElementById("character-name");
@@ -477,6 +483,7 @@
             characterName.textContent = characterImages[displayType].name;
             characterContainer.style.display = "block";
         } else {
+            console.error("キャラクター画像が見つかりません:", displayType);
             characterContainer.style.display = "none";
         }
 
