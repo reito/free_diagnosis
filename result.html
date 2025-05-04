@@ -443,7 +443,8 @@
 
         // タイトルを設定
         const titleElement = document.getElementById("resultType");
-        titleElement.textContent = `あなたのタイプは${typeNames[userGender][finalType]}です！`;
+        const typeName = typeNames[userGender][finalType] || 'バランスタイプ';
+        titleElement.textContent = `あなたのタイプは${typeName}です！`;
 
         // 結果を表示
         const resultTextElement = document.getElementById("resultText");
