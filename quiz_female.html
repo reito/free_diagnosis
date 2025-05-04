@@ -409,13 +409,20 @@
                              percentages.idol >= percentages.career && percentages.idol >= percentages.mother ? 'idol' :
                              percentages.career >= percentages.idol && percentages.career >= percentages.mother ? 'career' : 'mother';
 
+            let typeMapping = {
+                'idol': 'アイドルタイプ',
+                'career': 'バリキャリタイプ',
+                'mother': 'マザータイプ',
+                'balance': 'バランスタイプ'
+            };
+
             // URLからuserIdを取得
             const currentParams = new URLSearchParams(window.location.search);
             const userId = currentParams.get('userId');
 
             // 結果ページへのパラメータを設定
             const params = new URLSearchParams({
-                result: resultType,
+                result: typeMapping[resultType],
                 idol: percentages.idol,
                 career: percentages.career,
                 mother: percentages.mother,
