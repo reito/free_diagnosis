@@ -283,11 +283,8 @@
             { text: "自分の気持ちよりも、周りの人の意見を優先することが多い。", scores: { idol: 0, career: 0, mother: 2 } },
             { text: "流行には敏感な方である。", scores: { idol: 2, career: 0, mother: 0 } },
             { text: "相手が少し偉そうでも優柔不断な人よりマシと思う", scores: { idol: 0, career: 0, mother: 2 } },
-            { text: "男性には言いたいことが言えず、ついつい我慢してしまう。", scores: { idol: 0, career: 2, mother: 0 } },
             { text: "恋人とは「特別な日に特別な場所へ行きたい」と思う。", scores: { idol: 2, career: 0, mother: 0 } },
             { text: "仕事や家事などは効率的にこなすタイプだ。", scores: { idol: 0, career: 2, mother: 0 } },
-            { text: "よく道を聞かれることが多い。", scores: { idol: 0, career: 0, mother: 2 } },
-            { text: "歩く時は人の右側を歩きたい。", scores: { idol: 2, career: 0, mother: 0 } },
             { text: "頭ポンポンされるのは正直いやだと感じる。", scores: { idol: 0, career: 2, mother: 0 } },
             { text: "負ける勝負はしたくない。", scores: { idol: 0, career: 2, mother: 0 } },
             { text: "即断即決する事が苦手だと思う。", scores: { idol: 0, career: 0, mother: 2 } },
@@ -298,6 +295,7 @@
             { text: "美容にお金を使うのが好きだ。", scores: { idol: 2, career: 0, mother: 0 } },
             { text: "可愛いものやキラキラしたものを見ると欲しくなる。", scores: { idol: 2, career: 0, mother: 0 } },
             { text: "男性には経済力を求めてしまう。", scores: { idol: 2, career: 0, mother: 0 } },
+            { text: "SNSで自分の写真をよく投稿する方だ。", scores: { idol: 2, career: 0, mother: 0 } },
             // 新しい質問（バリキャリ）
             { text: "学校や職場ではリーダー的な立場になることが多い。", scores: { idol: 0, career: 2, mother: 0 } },
             { text: "考えたことや思いついたことに対しすぐに行動する方だ。", scores: { idol: 0, career: 2, mother: 0 } },
@@ -375,31 +373,21 @@
                 mother: 10
             };
             
-            // 各タイプのスコアを初期化
-            const selectedAnswers = {
-                idol: 0,
-                career: 0,
-                mother: 0
-            };
-
-            // 各タイプの質問数をカウント
-            const typeQuestions = {
-                idol: questions.filter(q => q.scores.idol > 0).length,
-                career: questions.filter(q => q.scores.career > 0).length,
-                mother: questions.filter(q => q.scores.mother > 0).length
-            };
-
-            // 各タイプのスコアを計算
+            // 各タイプの「そう思う」の回答数をカウント
+            let selectedAnswers = { idol: 0, career: 0, mother: 0 };
+            
             questions.forEach((question, index) => {
                 const answer = document.querySelector(`input[name="q${index}"]:checked`);
                 if (answer.value === "yes") {
-                    selectedAnswers.idol += question.scores.idol;
-                    selectedAnswers.career += question.scores.career;
-                    selectedAnswers.mother += question.scores.mother;
-                } else if (answer.value === "neutral") {
-                    selectedAnswers.idol += question.scores.idol * 0.5;
-                    selectedAnswers.career += question.scores.career * 0.5;
-                    selectedAnswers.mother += question.scores.mother * 0.5;
+                    if (question.scores.idol > 0) selectedAnswers.idol++;
+                    if (question.scores.career > 0) selectedAnswers.career++;
+                    if (question.scores.mother > 0) selectedAnswers.mother++;
+                }
+                // どちらとも言えないは0.5カウント
+                else if (answer.value === "neutral") {
+                    if (question.scores.idol > 0) selectedAnswers.idol += 0.5;
+                    if (question.scores.career > 0) selectedAnswers.career += 0.5;
+                    if (question.scores.mother > 0) selectedAnswers.mother += 0.5;
                 }
             });
 
