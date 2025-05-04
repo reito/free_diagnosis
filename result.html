@@ -330,36 +330,36 @@
         // キャラクター画像のマッピング
         const characterImages = {
             "キングタイプ": {
-                image: "img/king_type.png",
+                image: "./img/king_type.png",
                 name: "キングタイプ"
             },
             "ナイトタイプ": {
-                image: "img/knight_type.png",
+                image: "./img/knight_type.png",
                 name: "ナイトタイプ"
             },
             "プリンスタイプ": {
-                image: "img/prince_type.png",
+                image: "./img/prince_type.png",
                 name: "プリンスタイプ"
             },
             "アイドルタイプ": {
-                image: "img/idol_type.png",
+                image: "./img/idol_type.png",
                 name: "アイドルタイプ"
             },
             "バリキャリタイプ": {
-                image: "img/career_type.png",
+                image: "./img/career_type.png",
                 name: "バリキャリタイプ"
             },
             "マザータイプ": {
-                image: "img/mother_type.png",
+                image: "./img/mother_type.png",
                 name: "マザータイプ"
             },
             "バランスタイプ": {
                 male: {
-                    image: "img/balance_type_male.png",
+                    image: "./img/balance_type_male.png",
                     name: "バランスタイプ（男性）"
                 },
                 female: {
-                    image: "img/balance_type_female.png",
+                    image: "./img/balance_type_female.png",
                     name: "バランスタイプ（女性）"
                 }
             }
@@ -377,7 +377,7 @@
 
             "バリキャリタイプ": "バリキャリタイプ寄りのあなたは、冷静で判断力に優れた頼れる存在。常に落ち着いた雰囲気をまとい、周囲からの信頼も厚いタイプです。感情よりも理性を大切にし、計画的かつ論理的に物事を進める姿勢が印象的です。<br><br>【強み】<br>自分の軸があり、物事にブレずに取り組める力が最大の魅力。恋愛でもパートナーと対等に向き合い、堅実な関係を築こうとします。周囲の状況を冷静に把握できるため、信頼される存在として長く愛される傾向があります。<br><br>【気をつけたい点】<br>しっかりしている反面、「隙がない」「近寄りがたい」と見られてしまうことも。また、感情をあまり表に出さないため、「何を考えているのかわからない」と思われることもあります。ときには素直な弱さを見せることが、信頼関係を深める一歩になるかもしれません。",
 
-            "ナースタイプ": "ナースタイプ寄りのあなたは、人の世話を焼くのが得意で、自然と周囲を癒せる存在。包容力があり、相手を思いやる気持ちが深く、優しさにあふれています。落ち着いた雰囲気と、相手の気持ちに寄り添う力をあわせ持つ、心の支えのような人です。<br><br>【強み】<br>誰に対しても優しく、受け入れる器の大きさがあなたの魅力です。恋愛でも「安心できる相手」として信頼されることが多く、自然体で接することで相手をリラックスさせる力を持っています。思いやりと細やかな配慮が、安定した関係性を築く鍵になります。<br><br>【気をつけたい点】<br>人に尽くしすぎて、自分を後回しにしてしまうことも。相手に合わせすぎるあまり、「都合のいい存在」になってしまう可能性もあります。自分自身の気持ちや欲求も大切にし、「自分の幸せ」についてもしっかり考えることが大切です。",
+            "マザータイプ": "マザータイプ寄りのあなたは、人の世話を焼くのが得意で、自然と周囲を癒せる存在。包容力があり、相手を思いやる気持ちが深く、優しさにあふれています。落ち着いた雰囲気と、相手の気持ちに寄り添う力をあわせ持つ、心の支えのような人です。<br><br>【強み】<br>誰に対しても優しく、受け入れる器の大きさがあなたの魅力です。恋愛でも「安心できる相手」として信頼されることが多く、自然体で接することで相手をリラックスさせる力を持っています。思いやりと細やかな配慮が、安定した関係性を築く鍵になります。<br><br>【気をつけたい点】<br>人に尽くしすぎて、自分を後回しにしてしまうことも。相手に合わせすぎるあまり、「都合のいい存在」になってしまう可能性もあります。自分自身の気持ちや欲求も大切にし、「自分の幸せ」についてもしっかり考えることが大切です。",
 
             // 男性向けの説明
             "キングタイプ": "キングタイプ寄りのあなたは、自信に満ち、リーダーシップにあふれた頼れる存在。堂々とした態度と安定感で、周囲から自然と一目置かれるタイプです。しっかりとした価値観と信念を持ち、自らの考えに基づいて行動します。<br><br>【強み】<br>決断力があり、迷いなく行動できる点が大きな魅力です。恋愛でも「頼れるパートナー」としての存在感があり、相手に安心感と信頼を与えられます。ブレない軸と責任感で、長期的な関係を築くことにも向いています。<br><br>【気をつけたい点】<br>自信の強さが「俺様っぽい」「強引」と受け取られることも。自分の考えを押し通すあまり、相手の意見を無視してしまわないよう注意が必要です。相手の感情や立場にも寄り添うことで、より信頼される魅力が高まります。",
@@ -412,7 +412,7 @@
             : {
                 idol: parseInt(urlParams.get('idol')) || 0,
                 career: parseInt(urlParams.get('career')) || 0,
-                nurse: parseInt(urlParams.get('nurse')) || 0
+                mother: parseInt(urlParams.get('mother')) || 0
             };
 
         console.log("Parsed Scores:", scores);
@@ -467,6 +467,13 @@
             const balanceImage = characterImages["バランスタイプ"][userGender];
             
             if (balanceImage) {
+                characterImage.onload = function() {
+                    console.log("バランスタイプの画像を読み込みました:", balanceImage.image);
+                };
+                characterImage.onerror = function() {
+                    console.error("バランスタイプの画像の読み込みに失敗しました:", balanceImage.image);
+                    characterContainer.style.display = "none";
+                };
                 characterImage.src = balanceImage.image;
                 characterImage.alt = balanceImage.name;
                 characterName.textContent = balanceImage.name;
@@ -478,6 +485,13 @@
         } else if (characterImages[displayType]) {
             const characterImage = document.getElementById("character-image");
             const characterName = document.getElementById("character-name");
+            characterImage.onload = function() {
+                console.log("キャラクター画像を読み込みました:", characterImages[displayType].image);
+            };
+            characterImage.onerror = function() {
+                console.error("キャラクター画像の読み込みに失敗しました:", characterImages[displayType].image);
+                characterContainer.style.display = "none";
+            };
             characterImage.src = characterImages[displayType].image;
             characterImage.alt = characterImages[displayType].name;
             characterName.textContent = characterImages[displayType].name;
