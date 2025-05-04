@@ -417,48 +417,51 @@
 
         console.log("Parsed Scores:", scores);
 
-        // バランスタイプの判定を行う関数
-        function isBalancedType(scores, gender) {
-            if (gender === 'male') {
-                const values = [scores.king, scores.knight, scores.prince];
-                const max = Math.max(...values);
-                const min = Math.min(...values);
-                return (max - min) <= 5;
-            } else {
-                const values = [scores.idol, scores.career, scores.nurse];
-                const max = Math.max(...values);
-                const min = Math.min(...values);
-                return (max - min) <= 5;
+        // タイプ名の表示
+        const typeNames = {
+            female: {
+                idol: 'アイドルタイプ',
+                career: 'バリキャリタイプ',
+                mother: 'マザータイプ',
+                balance: 'バランスタイプ'
+            },
+            male: {
+                king: 'キングタイプ',
+                knight: 'ナイトタイプ',
+                prince: 'プリンスタイプ',
+                balance: 'バランスタイプ'
             }
-        }
+        };
 
-        // バランスタイプかどうかを判定
-        const isBalanced = isBalancedType(scores, userGender);
-        const displayType = isBalanced ? "バランスタイプ" : resultType;
+        // バランスタイプの判定
+        const isBalanceType = userGender === 'female' ? 
+            scores.idol === scores.career && scores.career === scores.mother :
+            scores.king === scores.knight && scores.knight === scores.prince;
 
-        console.log("Display Type:", displayType);
-        console.log("Is Balanced:", isBalanced);
-        console.log("Available Types:", Object.keys(descriptions));
+        // 結果タイプの決定
+        const finalType = isBalanceType ? 'balance' : resultType;
+
+        // タイトルを設定
+        const titleElement = document.getElementById("resultType");
+        titleElement.textContent = `あなたのタイプは${typeNames[userGender][finalType]}です！`;
 
         // 結果を表示
-        const resultTypeElement = document.getElementById("resultType");
         const resultTextElement = document.getElementById("resultText");
         const percentagesElement = document.getElementById("percentages");
 
         console.log("DOM Elements:", {
-            resultTypeElement,
+            resultTypeElement: titleElement,
             resultTextElement,
             percentagesElement
         });
 
-        if (resultTypeElement) resultTypeElement.textContent = `あなたのタイプは「${displayType}」です！`;
-        if (resultTextElement && descriptions[displayType]) {
-            resultTextElement.innerHTML = descriptions[displayType];
+        if (resultTextElement && descriptions[finalType]) {
+            resultTextElement.innerHTML = descriptions[finalType];
         } else {
             console.error("Failed to set description:", {
                 hasElement: !!resultTextElement,
-                hasDescription: !!descriptions[displayType],
-                displayType
+                hasDescription: !!descriptions[finalType],
+                finalType
             });
         }
         
@@ -467,7 +470,7 @@
 
         // キャラクター画像を表示
         const characterContainer = document.getElementById("character-container");
-        if (isBalanced) {
+        if (finalType === 'balance') {
             const characterImage = document.getElementById("character-image");
             const characterName = document.getElementById("character-name");
             const balanceImage = characterImages["バランスタイプ"][userGender];
@@ -481,18 +484,18 @@
             characterImage.alt = balanceImage.name;
             characterName.textContent = balanceImage.name;
             characterContainer.style.display = "block";
-        } else if (characterImages[displayType]) {
+        } else if (characterImages[finalType]) {
             const characterImage = document.getElementById("character-image");
             const characterName = document.getElementById("character-name");
-            console.log("Loading type image:", characterImages[displayType].image);
+            console.log("Loading type image:", characterImages[finalType].image);
             characterImage.onerror = function() {
                 console.error("Failed to load image:", this.src);
                 // フォールバック: エラー時に別の画像を試す
-                this.src = encodeURI(characterImages[displayType].image);
+                this.src = encodeURI(characterImages[finalType].image);
             };
-            characterImage.src = characterImages[displayType].image;
-            characterImage.alt = characterImages[displayType].name;
-            characterName.textContent = characterImages[displayType].name;
+            characterImage.src = characterImages[finalType].image;
+            characterImage.alt = characterImages[finalType].name;
+            characterName.textContent = characterImages[finalType].name;
             characterContainer.style.display = "block";
         } else {
             characterContainer.style.display = "none";
